@@ -1,0 +1,88 @@
+<div class="content-title">Ajouter un nouvel ingredient ou Plat</div>
+
+<div class="card_ajout">
+  <div class="bg">
+    <div class="card_content">
+      <div type="" class="card_type">
+        <div class="mydict">
+          <div>
+            <label>
+              <input type="radio" name="radio" checked="" />
+              <span>Plat</span>
+            </label>
+            <label>
+              <input type="radio" name="radio" />
+              <span>Ingredient</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="card_tof">
+        <label class="custum-file-upload" for="file">
+          <div class="icon">
+            <img src="../assets/upload.svg" alt="" />
+          </div>
+          <div class="text">
+            <span>Click to upload image</span>
+          </div>
+          <input type="file" id="file" />
+        </label>
+      </div>
+      <div class="card_details">
+        <div class="general">
+          <div class="general_title tyle">
+            <span class="general_title_label">Nom :</span>
+            <input type="text" class="general_title_input" id="general_title_name_input">
+          </div>
+          <div class="general_description tyle">
+            <span class="general_title_label">Description :</span>
+            <input type="text" class="general_title_input" id="general_title_description_input">
+          </div>
+        </div>
+        <div class="plats">
+
+          <div class="general_title tyle">
+            <span class="general_title_label">Prix :</span>
+            <input type="number"  class="input_number plats_prix_input" id="plats_prix_input">
+            <span class="general_title_label"> Fcfa </span>
+
+          </div>
+
+
+          <div class="plat general_title_label">Ingredients</div>
+          <div class="separator"></div>
+          <div class="selection-container">
+            <h2>Sélectionnez vos ingredients et entrez les quantités (en kg)</h2>
+        
+            <!-- Liste des options -->
+            <select id="options" class="selection_select">
+              <option value="">-- Sélectionnez --</option>
+              <option value="produit1">Produit 1</option>
+              <option value="produit2">Produit 2</option>
+              <option value="produit3">Produit 3</option>
+              <option value="produit4">Produit 4</option>
+            </select>
+        
+            <button class="add-button" id="addOption">Ajouter</button>
+        
+            <!-- Conteneur pour les options sélectionnées -->
+            <div id="selectedOptions"></div>
+        
+            <!-- Affichage du résultat -->
+            <div class="result" id="result"></div>
+          </div>
+        </div>
+        <div class="ingredient">
+          <div class="ingredient_quantite tyle">
+            <span class="general_title_label ">Quantite : </span>
+            <input type="number" class="input_number ingredient_quantite_input" id="ingredient_quantite_input">
+            <span class="general_title_label">Kg </span>
+
+          </div>
+        </div>
+      </div>
+      <button class="btn_add">Sauvegarder</button>
+    </div>
+  </div>
+  <div class="blob"></div>
+</div>

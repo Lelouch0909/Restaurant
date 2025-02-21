@@ -1,85 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="./style/main.css"
-    />
-    <script src="./scripts/main.js"></script>
-  </head>
 
-  <body>
-    <div class="main">
-      <div class="body">
-        <div class="left-bare">
-          <img class="title" src="./assets/svg/food.svg" ></img>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./style/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./style/ajout.css" />
+  <script type="module" src="./scripts/main.js" defer></script>
+  <script type="module" src="./scripts/changement_page.js" defer></script>
+  <script type="module" src="./scripts/ajouts_ingredients.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+  <script>
+      const { Client } = Appwrite;
+      const client = new Client();
+      client.setProject('67b743ae00251e3c967b');
+  </script>
 
-          <ul class="menu_list">
-            <div class="items">
-              <img class="icon" src="./assets/svg/home.svg" ></img>
-              <div class="text-icon">HOME</div>
-            </div>
-            <div class="items">
-              <img class="icon" src="./assets/svg/burger-menu-right-svgrepo-com.svg" ></img>
-              <div class="text-icon">MENU</div>
-            </div>
-            <div class="items">
-              <img class="icon" src="./assets/svg/buy-cart-online-svgrepo-com.svg" ></img>
-              <div class="text-icon">NOUVEAU</div>
-            </div>
-          </ul>
-          <div class="logout items">
-            <img class="icon" src="./assets/svg/Logout_Icon.svg" ></img>
-            <div class="text-icon" style="font-size: medium;">Se deconnecter</div>
+</head>
+
+<body>
+  <div class="main">
+    <div class="body">
+      <div class="left-bare">
+        <img class="title" src="./assets/svg/food.svg"></img>
+
+        <div class="menu_list">
+          <div class="items" data-section="home">
+            <img class="icon" src="./assets/svg/home.svg"></img>
+            <div class="text-icon">HOME</div>
+          </div>
+          <div class="items" data-section="menu">
+            <img class="icon" src="./assets/svg/burger-menu-right-svgrepo-com.svg"></img>
+            <div class="text-icon">MENU</div>
+          </div>
+          <div class="items" data-section="ajout">
+            <img class="icon" src="./assets/svg/buy-cart-online-svgrepo-com.svg"></img>
+            <div class="text-icon">NOUVEAU</div>
           </div>
         </div>
-        <div class="right-bare">
-          <div class="search">
-            <img class="icon" src="./assets/svg/search-alt-1-svgrepo-com.svg" ></img>
-
-            <input
-              type="search"
-              name="Search"
-              class="search_item"
-              placeholder="Rechercher..."
-            />
-          </div>
-          <div class="orders_group">
-            <div class="order_list_title">Order List</div>
-
-            <div class="order">
-              <div class="profil">
-                <div class="identifiant">
-                  <div class="numero_ordre">Order #350</div>
-                  <div class="date">05 Feb 2023, 08:28 PM</div>
-                </div>
-                <div class="photo_profil">
-                  <div class="photo"></div>
-                </div>
-              </div>
-              <div class="elements_commande">
-                <div class="element">
-                  <div class="photo_profil">
-                    <div class="photo"></div>
-                  </div>
-                  <div class="info">
-                    <div class="nom">Vegetable Mixups</div>
-                    <div class="description">Vegetable Fritters with Egg</div>
-                    <div class="prix"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="contenair"></div>
+        <div class="logout items" data-section="deconnection">
+          <img class="icon" src="./assets/svg/Logout_Icon.svg"></img>
+          <div class="text-icon" style="font-size: medium;">Se deconnecter</div>
         </div>
       </div>
+      <div id="main-content">
+      </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
