@@ -284,6 +284,7 @@ body {
 
 .presentation_plat {
   width: 5rem;
+  height: 5rem;
   object-fit: center;
 }
 
@@ -307,6 +308,7 @@ body {
 
 .presentation_details {
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 0.8rem;
   justify-content: start;

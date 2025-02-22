@@ -8,53 +8,88 @@ export async function get_plats() {
 
     
     orderGroup.innerHTML = "chargement..."
-    const ingredients = await getAllIngredients()
-    console.log("ingredients : ");
-    console.log(ingredients);
-    
+    const all_ingredients = await getAllIngredients()
+     
     
     const plats = getAllPlats().then((plats)=>{
-   
+        orderGroup.innerHTML = "";
+
         plats.forEach((plat)=>{
-            var nom_ingredient = ""
+            var nom_ingredient = []
+            var quantite_ingredient = []
+            var qte_total = 0
             const plat_ingredients = JSON.parse(plat.ingredients)
-            plat_ingredients.forEach((ingredient)=>{
-                console.log(ingredient);
-                
+            Object.keys(plat_ingredients).forEach((key)=>{
+              
+                all_ingredients.forEach((ingredient)=>{
+                    if(ingredient.$id === key){
+                        nom_ingredient = [ ...nom_ingredient, ingredient.nom ]
+                        quantite_ingredient = [ ...quantite_ingredient, plat_ingredients[key] ]
+                        console.log(plat_ingredients[key])
+                        console.log(ingredient.quantite)
+                        
+                        var t =parseInt(ingredient.quantite / plat_ingredients[key])
+                    
+                        
+                        if (qte_total<t) {
+                            qte_total = t
+                        }
+                    }
+                })
             })
+           
+            
             
 
             const order = document.createElement("div")
             order.classList.add("order")
+            qte_total < 1 ? order.style.borderColor = "red" : order.style.borderColor = "green"
 
             order.innerHTML = `
             <div class="order_presentation">
-                <img class="presentation_plat" src="${plat.photo_url}" alt="plat">
+                <img class="presentation_plat" src="${plat.photo_url ? plat.photo_url : ""}" alt="plat">
                 <div class="presentation_details">
                     <div class="details_name">${plat.nom}</div>
                     <div class="detail_description">${plat.description}</div>
                     <div class="details_infos">
-                        <div class="details_price">${plat.prix} FCFA</div>
-                        <div class="details_qte">${plat.quantite} kg</div> 
+                        <div class="details_price">${plat.prix} </div>
+                        <div class="details_qte">${qte_total} </div> 
                     </div>
                 </div>
             </div>
             <div class="separator"></div>
-            <div class="order_legende">
-                <div class="ingredient">
-                    <div class="ingredient_name">${nom_ingredient}</div>
-                    <div class="ingredient_qte">${ingredient.quantite} kg</div>
-                </div>
-            </div>
+            
             `
-            orderGroup.innerHTML = ""
+
+            const order_legende = createDivWithClass("div", "order_legende");
+
+    
+            nom_ingredient.forEach((nom, index)=>{
+                const div_ingredient = createDivWithClass("div", "ingredient");
+                const div_ingredient_name = createDivWithClass("div", "ingredient_name");
+                const div_ingredient_qte = createDivWithClass("div", "ingredient_qte");
+                div_ingredient_name.innerText = nom;
+                div_ingredient_qte.innerText = quantite_ingredient[index];
+                div_ingredient.appendChild(div_ingredient_name);
+                div_ingredient.appendChild(div_ingredient_qte);
+                order_legende.appendChild(div_ingredient);
+                });
+          
+            order.appendChild(order_legende);
             orderGroup.appendChild(order)
         })
     })
-    .catch(()=> {
+    .catch((e)=> {
+      
         orderGroup.innerHTML = "Impossible de charger les elements; verifiez votre connection internet."
 
     })
+
    
+    function createDivWithClass(type, classname) {
+        const div = document.createElement(type);
+        div.setAttribute("class", classname);
+        return div;
+      }
     
 }
