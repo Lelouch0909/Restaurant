@@ -34,6 +34,16 @@ async function loadSection(pageId) {
 
 // Fonction pour initialiser les scripts spécifiques à chaque page
 function initializePageScripts(pageId) {
+  if (pageId === 'home') {
+    import('./home.js').then((module) => {
+      module.get_plats();
+    });
+  }
+  if (pageId === 'menu') {
+    import('./menu.js').then((module) => {
+      module.get_ingredients();
+    });
+  }
   if (pageId === 'ajout') {
     import('./ajouts.js').then((module) => {
       module.ajouts_page();

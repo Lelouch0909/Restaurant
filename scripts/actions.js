@@ -110,3 +110,71 @@ export async function getAllIngredients() {
     throw new Error(error);
   }
 }
+export async function getAllPlats() {
+  try {
+    const posts = await database.listDocuments(databaseId, 
+      platsId, [
+      Query.orderDesc("$createdAt"),
+    ]);
+
+    return posts.documents;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function deleteIngredient(ingredientId) {
+  try {
+    document.getElementById("loader").style.display = "block";
+
+    const promise = database.deleteDocument(
+      databaseId,
+      ingredientsId,
+      ingredientId
+    );
+    await promise
+      .then(function (response) {
+        document.getElementById("loader").style.display = "none";
+        alert("Ingredient supprimé avec succès");
+
+        console.log(response);
+      })
+      .catch(function (error) {
+        document.getElementById("loader").style.display = "none";
+        alert("Erreur lors de la suppression de l'ingredient:", error);
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+export async function updateQuantite(ingredientId, quantity) {
+  try {
+    document.getElementById("loader").style.display = "block";
+    console.log(ingredientId);
+    console.log(quantity);
+    
+    const promise = database.updateDocument(
+      databaseId,
+      ingredientsId,
+      ingredientId,
+      {
+        quantite: parseFloat(quantity),
+      }
+    );
+    
+    await promise
+      .then(function (response) {
+        document.getElementById("loader").style.display = "none";
+        alert("Quantité modifiée avec succès");
+      })
+      .catch(function (error) {
+        console.log(error);
+
+        document.getElementById("loader").style.display = "none";
+        alert("Erreur lors de la modification de la quantité:", error);
+      });
+  } catch (error) {
+   
+    throw new Error(error);
+  }
+}

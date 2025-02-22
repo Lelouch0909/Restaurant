@@ -1,0 +1,19 @@
+.right-bare-menu  button {
+    background: red ;
+    color: #fff;
+    padding: 0.8rem;
+    font-size: x-small;
+    
+
+}
+.right-bare-menu   .upd_ing {
+    background: green !important;
+    color: #fff;
+    padding: 0.8rem;
+    font-size: x-small;
+    
+
+}
+.upd_input{
+    width: 3rem;
+}
