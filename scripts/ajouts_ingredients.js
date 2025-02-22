@@ -1,9 +1,12 @@
+import { currentIngredients } from "./ajouts.js";
+
+export var selectedIngredients = {}
+
 export function initializeAjoutIngredients() {
   const addButton = document.getElementById('addOption');
   const selectedOptionsContainer = document.getElementById('selectedOptions');
   const resultElement = document.getElementById('result');
   const selectElement = document.getElementById('options');
-  console.log(addButton);
   
 
   if (!addButton || !selectedOptionsContainer || !resultElement || !selectElement) {
@@ -30,12 +33,12 @@ export function initializeAjoutIngredients() {
     optionItem.className = 'option-item';
 
     const label = document.createElement('label');
-    label.textContent = selectedValue;
+    label.textContent = currentIngredients[selectedValue].nom;
 
     const quantityInput = document.createElement('input');
     quantityInput.type = 'number';
-    quantityInput.min = '1';
-    quantityInput.value = '1';
+    quantityInput.min = '0';
+    quantityInput.value = '0';
     quantityInput.style.width = '50px';
 
     const removeButton = document.createElement('div');
@@ -43,7 +46,7 @@ export function initializeAjoutIngredients() {
 
     removeButton.addEventListener('click', () => {
       optionItem.remove();
-      delete selections[selectedValue]; //****************** */
+      delete selections[selectedValue]; 
       updateResult();
     });
 
@@ -53,10 +56,10 @@ export function initializeAjoutIngredients() {
 
     selectedOptionsContainer.appendChild(optionItem);
 
-    selections[selectedValue] = 1;
+    selections[selectedValue] = 0;
 
     quantityInput.addEventListener('input', () => {
-      const quantity = parseInt(quantityInput.value) || 1;
+      const quantity = parseFloat(quantityInput.value) || 1;
       selections[selectedValue] = quantity;
       updateResult();
     });
@@ -73,6 +76,9 @@ export function initializeAjoutIngredients() {
     for (const [option, quantity] of Object.entries(selections)) {
       resultText += `${option}: ${quantity} unités\n`;
       totalQuantity += quantity;
+      selectedIngredients = {...selectedIngredients, [option]: quantity}
+      console.log(selectedIngredients);
+      
     }
 
     if (resultText !== '') {

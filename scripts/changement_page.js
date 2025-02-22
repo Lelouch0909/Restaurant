@@ -35,8 +35,12 @@ async function loadSection(pageId) {
 // Fonction pour initialiser les scripts spécifiques à chaque page
 function initializePageScripts(pageId) {
   if (pageId === 'ajout') {
+    import('./ajouts.js').then((module) => {
+      module.ajouts_page();
+    });
     import('./ajouts_ingredients.js').then((module) => {
       module.initializeAjoutIngredients();
     });
+   
   }
 }

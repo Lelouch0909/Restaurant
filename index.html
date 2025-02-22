@@ -8,21 +8,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" media="screen" href="./style/main.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="./style/ajout.css" />
-  <script type="module" src="./scripts/main.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+
+  <script type="module" src="./scripts/actions.js" defer></script>
   <script type="module" src="./scripts/changement_page.js" defer></script>
   <script type="module" src="./scripts/ajouts_ingredients.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
-  <script>
-      const { Client } = Appwrite;
-      const client = new Client();
-      client.setProject('67b743ae00251e3c967b');
-  </script>
 
 </head>
 
 <body>
+
   <div class="main">
+
     <div class="body">
+      <div class="loader" id="loader">
+        <div class="spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       <div class="left-bare">
         <img class="title" src="./assets/svg/food.svg"></img>
 

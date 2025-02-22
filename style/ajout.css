@@ -310,3 +310,11 @@ button:active{
  cursor: pointer;
 }
 
+.tyle{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  text-wrap: nowrap;
+}
