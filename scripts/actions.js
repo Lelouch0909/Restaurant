@@ -1,5 +1,5 @@
-const { Client, Databases, ID, Storage, Query } = Appwrite;
-
+const { Client, Databases, ID, Storage, Query, Account } = Appwrite;
+//Zelefack1
 const databaseId = "67b8d77f000b5f5e2424";
 const platsId = "67b8d8830011178c0011";
 const ingredientsId = "67b8d78a002c736416ea";
@@ -8,10 +8,48 @@ const storageId = "67b9906a001e34336d13";
 const client = new Client();
 client.setProject("67b743ae00251e3c967b");
 client.setEndpoint("https://cloud.appwrite.io/v1");
+export const account = new Account(client);
+
 
 const database = new Databases(client);
 
 const storage = new Storage(client);
+
+
+export async function getAccount() {
+  try {
+    const currentAccount = await account.get();
+
+    return currentAccount;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function signIn(mail, password) {
+  document.getElementById("error").style.display = "none";
+  document.getElementById("submit-connexion").style.zIndex = "0";
+  const bsubmit = document.getElementById("submit-connexion");
+
+  try {
+    bsubmit.style.pointerEvents = "none";
+    let email = mail + "@enterprise.com";
+    console.log(email);
+    console.log(password);
+    
+    
+    const session = await account.createEmailPasswordSession(email, password);
+    return session;
+    
+  } catch (error) {
+    document.getElementById("error").style.display = "block";
+    throw new Error(error);
+  }
+  finally{
+    bsubmit.style.pointerEvents = "auto";
+
+  }
+}
 
 export async function addIngredient(ingredientData, photoData = null) {
   document.getElementById("loader").style.display = "block";
@@ -176,5 +214,23 @@ export async function updateQuantite(ingredientId, quantity) {
   } catch (error) {
    
     throw new Error(error);
+  }
+}
+
+// Sign Out
+export async function deconnexion() {
+  try {
+    document.getElementById("loader").style.display = "block";
+
+    const currentAccount = await getAccount();
+
+    const session = await account.deleteSessions(currentAccount.$id);
+
+    return session;
+  } catch (error) {
+    throw new Error(error);
+  }
+  finally{
+    document.getElementById("loader").style.display = "none";
   }
 }

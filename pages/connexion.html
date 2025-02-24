@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../style/connexion.css'>
+    <script type="module" src='../scripts/connexion.js'defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+
+</head>
+<body>
+    <div class="error" id="error">
+        nom  / mot de passe incorrecte
+    </div>
+
+  <div class="g-title"
+  >
+    <img src="../assets/svg/food.svg"></img>
+    <span>Vous souhaite...</span>
+  </div>
+
+    <div class="form-container">
+    <div class="form" ">
+      <div class="form-group">
+        <div class="title">Bon retour</div>
+
+        <label for="email">Nom de la compagnie</label>
+        <input type="text" id="email" name="email" required="">
+      </div>
+      <div class="form-group">
+        <label for="textarea">Mot de passe</label>
+        <input  type="password" name="textarea" id="password" required=""> </input>
+      </div>
+    
+      <button class="form-submit-btn" type="submit" id="submit-connexion">connexion</button>
+    </div>
+  </div>
+</body>
+</html>

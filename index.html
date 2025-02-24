@@ -9,6 +9,28 @@
   <link rel="stylesheet" type="text/css" media="screen" href="./style/main.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="./style/menu.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="./style/ajout.css" />
+  <script type="module">
+import { getAccount,deconnexion } from "./scripts/actions.js";
+
+try {
+  const account = await getAccount()
+    console.log(account);
+    
+} catch (error) {
+  window.location.href = "./pages/connexion.html";
+
+}   
+      document.getElementById("logout").addEventListener("click", async () => {
+        try {
+          await deconnexion();
+          location.reload()
+        } catch (error) {
+          console.log(error);
+        }
+      });
+       
+
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
 
   <script type="module" src="./scripts/actions.js" defer></script>
@@ -58,7 +80,7 @@
         </div>
         <div class="logout items" data-section="deconnection">
           <img class="icon" src="./assets/svg/Logout_Icon.svg"></img>
-          <div class="text-icon" style="font-size: medium;">Se deconnecter</div>
+          <div class="text-icon" style="font-size: medium;" id="logout">Se deconnecter</div>
         </div>
       </div>
       <div id="main-content">
