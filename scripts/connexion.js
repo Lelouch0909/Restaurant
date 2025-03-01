@@ -14,7 +14,6 @@ const submit = async (e) => {
   const bsubmit = document.getElementById("submit-connexion");
   if (inp_con && password) {
     try {
-      console.log("ici");
 
       const session = await signIn(inp_con, inp_pass);
 

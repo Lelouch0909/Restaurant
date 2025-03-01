@@ -10,11 +10,9 @@ client.setProject("67b743ae00251e3c967b");
 client.setEndpoint("https://cloud.appwrite.io/v1");
 export const account = new Account(client);
 
-
 const database = new Databases(client);
 
 const storage = new Storage(client);
-
 
 export async function getAccount() {
   try {
@@ -34,29 +32,27 @@ export async function signIn(mail, password) {
   try {
     bsubmit.style.pointerEvents = "none";
     let email = mail + "@enterprise.com";
-    console.log(email);
-    console.log(password);
-    
-    
+
     const session = await account.createEmailPasswordSession(email, password);
     return session;
-    
   } catch (error) {
     document.getElementById("error").style.display = "block";
     throw new Error(error);
-  }
-  finally{
+  } finally {
     bsubmit.style.pointerEvents = "auto";
-
   }
 }
 
 export async function addIngredient(ingredientData, photoData = null) {
   document.getElementById("loader").style.display = "block";
+  console.log(1);
+
   if (photoData) {
     const imgUrl = await uploadFile(photoData, "image");
     ingredientData = { ...ingredientData, photo_url: imgUrl };
   }
+  console.log(2);
+  
 
   const promise = database.createDocument(
     databaseId,
@@ -76,6 +72,8 @@ export async function addIngredient(ingredientData, photoData = null) {
 
       alert("Erreur lors de l'ajout de l'ingredient:", error);
     });
+    console.log(3);
+
 }
 
 export async function addPlat(platData, photoData = null) {
@@ -114,6 +112,8 @@ export async function uploadFile(file, type) {
     const fileUrl = await getFilePreview(uploadedFile.$id, type);
     return fileUrl;
   } catch (error) {
+    console.log(error);
+    
     throw new Error(error);
   }
 }
@@ -150,8 +150,7 @@ export async function getAllIngredients() {
 }
 export async function getAllPlats() {
   try {
-    const posts = await database.listDocuments(databaseId, 
-      platsId, [
+    const posts = await database.listDocuments(databaseId, platsId, [
       Query.orderDesc("$createdAt"),
     ]);
 
@@ -190,7 +189,7 @@ export async function updateQuantite(ingredientId, quantity) {
     document.getElementById("loader").style.display = "block";
     console.log(ingredientId);
     console.log(quantity);
-    
+
     const promise = database.updateDocument(
       databaseId,
       ingredientsId,
@@ -199,7 +198,7 @@ export async function updateQuantite(ingredientId, quantity) {
         quantite: parseFloat(quantity),
       }
     );
-    
+
     await promise
       .then(function (response) {
         document.getElementById("loader").style.display = "none";
@@ -212,7 +211,6 @@ export async function updateQuantite(ingredientId, quantity) {
         alert("Erreur lors de la modification de la quantité:", error);
       });
   } catch (error) {
-   
     throw new Error(error);
   }
 }
@@ -229,8 +227,7 @@ export async function deconnexion() {
     return session;
   } catch (error) {
     throw new Error(error);
-  }
-  finally{
+  } finally {
     document.getElementById("loader").style.display = "none";
   }
 }
